@@ -12,7 +12,7 @@
 
     <a class="btn btn-primary mb-3" href="{{ route('student.create') }}" role="button">Create</a>
 
-    <table class="table table-bordered border-primary table-hover">
+    <table class="table table-bordered border-primary table-hover" id="example">
         <thead>
             <tr>
                 <th scope="col">#</th>

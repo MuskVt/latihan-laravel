@@ -14,7 +14,7 @@ class Department extends Model
     /** @use HasFactory<\Database\Factories\DepartmentFactory> */
     use HasFactory;
 
-        public function lecturer(): HasMany
+        public function lecturers(): HasMany
     {
         return $this->hasMany(Lecturer::class);
     }
