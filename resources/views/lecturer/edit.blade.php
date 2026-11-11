@@ -4,7 +4,7 @@
         {{ $title }}
     </x-slot>
 
-    <form method="post" action="{{ route('lecturer.update', $lecturer) }}">
+    <form method="post" action="{{ route('lecturer.update', $lecturer) }}" enctype="multipart/form-data">
         @csrf
         @method('put')
         <div class="mb-3">
@@ -17,6 +17,7 @@
 
         </div>
 
+        {{-- program studi --}}
         <div class="mb-3">
             <label for="nim" class="form-label">Program studi</label>
 
@@ -35,6 +36,20 @@
             @error('nim')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
+
+            {{-- gambar --}}
+            <div class="mb-3">
+                <img id="preview"
+                    src="{{ $lecturer->avatar ? asset('storage/' . $lecturer->avatar) : asset('images/no-image.png') }}"
+                    class="w-50 rounded"> <br>
+
+                <label for="avatar" class="form-label">Upload Avatar</label>
+                <input type="file" class="form-control @error('avatar') is-invalid @enderror" id="upload"
+                    name="avatar">
+                @error('avatar')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
 
         </div>
 

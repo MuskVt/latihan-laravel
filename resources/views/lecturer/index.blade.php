@@ -27,7 +27,11 @@
             @foreach ($lecturers as $lecturer)
                 <tr>
                     <th scope="row">{{ $loop->iteration }}</th>
-                    <td>{{ $lecturer->name }}</td>
+                    <td>
+                        <img src="{{ $lecturer->avatar ? asset('storage/' . $lecturer->avatar) : asset('images/no-image.png') }}"
+                            width="50">
+                        {{ $lecturer->name }}
+                    </td>
                     <td>{{ $lecturer->department->name }}</td>
 
                     <td>

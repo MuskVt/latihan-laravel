@@ -4,7 +4,7 @@
         {{ $title }}
     </x-slot>
 
-    <form method="post" action="{{ route('lecturer.store') }}">
+    <form method="post" action="{{ route('lecturer.store') }}" enctype="multipart/form-data">
         @csrf
 
         <div class="mb-3">
@@ -37,6 +37,21 @@
             @enderror
 
         </div>
+
+        {{-- untuk menampilkan gambar --}}
+
+        <div class="mb-3">
+            <img id="preview" src="{{ asset('images/no-image.png') }}" alt="xffxf" class="w-25 rounded"> <br>
+
+            <label for="avatar" class="form-label">Upload Avatar</label>
+            <input type="file" class="form-control @error('avatar') is-invalid @enderror" id="upload"
+                name="avatar">
+            @error('avatar')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+
+
 
         <a class="btn btn-warning" href="{{ route('lecturer.index') }}" role="button">Back</a>
         <button type="submit" class="btn btn-primary">Submit</button>
