@@ -66,7 +66,10 @@ class LecturerController extends Controller
      */
     public function show(Lecturer $lecturer)
     {
-        //
+                return view('lecturer.show',[
+            'title' => 'Detail lecturer',
+            'lecturer' => $lecturer
+        ]);
     }
 
     /**
@@ -121,6 +124,40 @@ class LecturerController extends Controller
      */
     public function destroy(Lecturer $lecturer)
     {
-        //
+        $lecturer->delete();
+
+        return to_route('lecturer.index')->withSuccess('Data berhasil dihapus!');
     }
+
+    // === soft deletes ===
+
+        public function trash()
+    {
+        return view('lecturer.trash',[
+            'title' => 'lecturer Trash',
+            'lecturers' => Lecturer::onlyTrashed()->latest()->get(),
+        ]);
+    }
+
+    // == Restore ==
+        public function restore(Lecturer $lecturer)
+    {
+        $lecturer->restore();
+
+        return to_route('lecturer.trash')->withSuccess('Data berhasil pulihkan!');
+    }
+    
+    // == perma delete ==
+        public function forceDelete(Lecturer $lecturer)
+    {
+        $lecturer->forceDelete();
+
+        if($lecturer->avatar){
+            Storage::disk('public')->delete($lecturer->avatar);
+        }
+
+        return to_route('lecturer.trash')->withSuccess('Data berhasil Dihapus!');
+    }
+
+    
 }

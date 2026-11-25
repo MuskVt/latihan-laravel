@@ -18,4 +18,10 @@ Route::put('/student/{student}', [StudentController::class, 'update'])->name('st
 Route::delete('/student/{student}', [StudentController::class, 'destroy'])->name('student.destroy');
 
 Route::resource('department', DepartmentController::class);
+
+
+Route::get('/lecturer/trash', [LecturerController::class, 'trash'])->name('lecturer.trash');
+Route::put('/lecturer/{lecturer}/restore', [LecturerController::class, 'restore'])->name('lecturer.restore')->withTrashed();
+Route::delete('/lecturer/{lecturer}/force-delete', [LecturerController::class, 'forceDelete'])->name('lecturer.forceDelete')->withTrashed();
+
 Route::resource('lecturer', LecturerController::class);
